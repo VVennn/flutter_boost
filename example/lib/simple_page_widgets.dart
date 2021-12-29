@@ -68,6 +68,44 @@ class _FirstRouteWidgetState extends State<FirstRouteWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            InkWell(
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                margin: const EdgeInsets.all(8.0),
+                color: Colors.yellow,
+                child: const Text(
+                  'bug',
+                  style: TextStyle(fontSize: 22.0, color: Colors.black),
+                ),
+              ),
+              onTap: () {
+                showCupertinoModalPopup(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return CupertinoActionSheet(
+                        title: Text('提示'),
+                        message: Text('是否要删除当前项？'),
+                        actions: <Widget>[
+                          CupertinoActionSheetAction(
+                            child: Text('删除'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            isDefaultAction: true,
+                          ),
+                          CupertinoActionSheetAction(
+                            child: Text('暂时不删'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            isDestructiveAction: true,
+                          ),
+                        ],
+                      );
+                    }
+                );
+              },
+            ),
             RaisedButton(
               child: const Text('Open native page'),
               onPressed: () {
@@ -367,7 +405,7 @@ class _FlutterRouteWidgetState extends State<FlutterRouteWidget> {
       appBar: AppBar(
         brightness: Brightness.light,
         backgroundColor: Colors.white,
-        textTheme: const TextTheme(title: TextStyle(color: Colors.black)),
+        textTheme: const TextTheme(subtitle1: TextStyle(color: Colors.black)),
         title: const Text('flutter_boost_example'),
       ),
       body: SingleChildScrollView(
